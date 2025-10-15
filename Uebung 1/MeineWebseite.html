@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ann-Sophie – Persönliche Startseite</title>
+  <style>
+  :root {
+    --bg: #fff;
+    --fg: #183c2b;
+    --accent: #20b581;
+    --card-bg: #eafaf5;
+    --border: #b2e5d3;
+  }
+
+  /* 🌙 DARK MODE */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121212;
+      --fg: #e6e6e6;
+      --accent: #20b581;
+      --card-bg: #1c1c1c;
+      --border: #333;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+    }
+
+    .header-bg {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .karte {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+    }
+
+    .stationen th {
+      background: var(--card-bg);
+      color: var(--accent);
+      border-color: var(--border);
+    }
+
+    .stationen td {
+      background: #1a1a1a;
+      color: var(--fg);
+      border-color: var(--border);
+    }
+
+    .profile img {
+      border-color: var(--accent);
+      background: #2a2a2a;
+    }
+
+    .karte:hover {
+      box-shadow: 0 2px 12px rgba(32,181,129,0.25);
+    }
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* === HEADER === */
+  .header-bg {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+  }
+  header {
+    padding: 2.5rem 1.2rem 1.5rem 1.2rem;
+    text-align: center;
+    letter-spacing: 0.01em;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  header h1 {
+    margin: 0 0 0.7rem 0;
+    font-size: 2.2rem;
+    color: var(--accent);
+  }
+  header p {
+    margin: 0.7rem 0;
+    font-size: 1.15rem;
+  }
+
+  main {
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* === ÜBER MICH === */
+  .profile {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: var(--bg);
+    padding: 1.5rem 3rem;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    grid-template-rows: auto 1fr;
+    align-items: start;
+    gap: 2.5rem;
+  }
+
+  .profile h2 {
+    grid-column: 1 / -1;
+    margin: 0;
+    text-align: left;
+  }
+
+  .profile figure {
+    margin: 0;
+    justify-self: start;
+  }
+
+  .profile img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: #eee;
+    display: block;
+  }
+
+  .profile figcaption {
+    display: block;
+    margin-top: 0.4em;
+    font-size: 0.95em;
+    color: var(--fg);
+    opacity: 0.7;
+    text-align: center;
+  }
+
+  .profile div:last-of-type {
+    align-self: start;
+    margin-left: 2.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .profile {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 1rem;
+    }
+    .profile h2 {
+      grid-column: 1;
+    }
+    .profile img {
+      margin: 0 auto;
+    }
+    .profile div:last-of-type {
+      margin-top: 0.5rem;
+      margin-left: 0;
+    }
+  }
+
+  /* === STATIONEN === */
+  .stationen {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-bottom: 2rem;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    overflow-x: auto;
+  }
+  .stationen table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+  .stationen th, .stationen td {
+    padding: 0.5em 0.7em;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  .stationen th {
+    background: var(--card-bg);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* === GALERIE === */
+  .galerie {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(280px, 1fr)); /* Karten breiter */
+    gap: 2.5rem;
+    justify-content: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .karte {
+    min-width: 280px; /* Mindestbreite für jede Karte */
+    min-height: 320px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.7em;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s;
+  }
+  .karte:hover {
+    box-shadow: 0 2px 12px rgba(32,181,129,0.15);
+  }
+  .karte a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    height: 100%;
+  }
+  .karte img {
+    width: 100%;
+    height: 180px;             /* Bildhöhe vergrößert */
+    object-fit: cover;
+    border-bottom: 1px solid var(--border);
+  }
+  .karte .card-content {
+    padding: 1.2em 1.2em 2.5em 1.2em; /* Mehr Platz unten */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    min-height: 120px; /* Mindesthöhe für den Textbereich */
+  }
+  .karte h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+  .karte p {
+    margin: 0;
+    font-size: 0.98rem;
+  }
+
+  @media (max-width: 1000px) {
+    .galerie {
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+    }
+  }
+  @media (max-width: 700px) {
+    .galerie {
+      grid-template-columns: 1fr;
+    }
+    .karte {
+      min-width: 0;
+    }
+  }
+  @media (max-width: 500px) {
+    header h1 { font-size: 1.5rem; }
+    main { padding: 1rem 0.5rem; }
+    .karte img { height: 90px; }
+  }
+  </style>
+</head>
+
+<body>
+  <div class="header-bg">
+    <header>
+      <h1>Ann-Sophie Becker</h1>
+      <p>Willkommen auf meiner persönlichen Startseite!</p>
+    </header>
+  </div>
+
+  <main>
+    <section class="profile">
+      <h2>Über mich</h2>
+      <figure>
+        <img src="IMG_1300.jpeg" alt="Ann-Sophie Becker" loading="lazy">
+        <figcaption>Ann-Sophie Becker</figcaption>
+      </figure>
+      <div>
+        <p>Ich bin Studentin an der Hochschule Mainz und beschäftige mich mit Geoinformatik, GIS und Webentwicklung. Mein Ziel ist es, innovative Lösungen für urbane Herausforderungen zu entwickeln.</p>
+        <p>Mich begeistert die Verbindung von Technik und Raumbezug – wie Daten, Karten und digitale Werkzeuge dabei helfen können, unsere Umwelt besser zu verstehen und nachhaltiger zu gestalten. Besonders spannend finde ich die Anwendung von Geoinformationssystemen (GIS) in den Bereichen Stadtplanung, Umweltmonitoring und Mobilität.</p>
+        <p>Neben dem Studium arbeite ich gerne an eigenen Projekten, bei denen ich Geodaten visualisiere oder interaktive Karten entwickle. Ich lege Wert auf strukturierte Arbeit, Kreativität und ein gutes Verständnis für Details – sei es bei der Datenauswertung, beim Programmieren oder im Teamprojekt.</p>
+        <p>Langfristig möchte ich mein Wissen in Richtung Smart Cities und datenbasierte Stadtentwicklung vertiefen, um aktiv an der Gestaltung lebenswerter, moderner Städte mitzuwirken.</p>
+      </div>
+    </section>
+
+    <section class="stationen">
+      <h2>Stationen</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Jahr</th>
+            <th>Station</th>
+            <th>Ort</th>
+            <th>Stichwort</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2022</td><td>Schulpraktikum</td><td>Winzeln</td><td>Innenarchitektur</td></tr>
+          <tr><td>2023</td><td>Abitur</td><td>Pirmasens</td><td>Schulabschluss</td></tr>
+          <tr><td>2023</td><td>Vorpraktikum</td><td>Pirmasens</td><td>Studiumsvorbereitung</td></tr>
+          <tr><td>2023</td><td>Studienbeginn</td><td>Mainz</td><td>Vermessung und Geoinformatik</td></tr>
+          <tr><td>2026</td><td>Bachelorarbeit</td><td>Mainz</td><td>Datenanalyse</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="galerie">
+      <div class="karte">
+        <a href="https://www.hs-mainz.de/" target="_blank" rel="noopener" aria-label="Hochschule Mainz">
+          <img src="HS_Mainz.jpeg" alt="Hochschule Mainz" loading="lazy">
+          <div class="card-content">
+            <h3>Hochschule Mainz</h3>
+            <p>Studium im Bereich Geoinformatik und Vermessung.</p>
+          </div>
+        </a>
+      </div>
+      <div class="karte">
+        <a href="https://github.com/bachelor-hsmainz-2326/bachelor-hsmainz-2326.github.io" target="_blank" rel="noopener" aria-label="GitHub">
+          <img src="https://picsum.photos/600/400?random=2" alt="GitHub Platzhalterbild" loading="lazy">
+          <div class="card-content">
+            <h3>GitHub</h3>
+            <p>Mein Code, Projekte und Beiträge auf GitHub.</p>
+          </div>
+        </a>
+      </div>
+      <div class="karte">
+        <a href="https://portfolio.example.com/" target="_blank" rel="noopener" aria-label="Portfolio">
+          <img src="https://picsum.photos/600/400?random=3" alt="Portfolio Platzhalterbild" loading="lazy">
+          <div class="card-content">
+            <h3>Portfolio</h3>
+            <p>Eine Auswahl meiner Arbeiten und Projekte im Überblick.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
