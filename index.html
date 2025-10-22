@@ -12,52 +12,42 @@
     --card-bg: #eafaf5;
     --border: #b2e5d3;
   }
+  
+  :root[data-theme="dark"] {
+    --bg: #121212;
+    --fg: #e6e6e6;
+    --accent: #20b581;
+    --card-bg: #1c1c1c;
+    --border: #333;
+  }
 
-  /* 🌙 DARK MODE */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #121212;
-      --fg: #e6e6e6;
-      --accent: #20b581;
-      --card-bg: #1c1c1c;
-      --border: #333;
-    }
+  #theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 1000;
+  }
 
-    body {
-      background-color: var(--bg);
-      color: var(--fg);
-    }
+  #theme-toggle:hover {
+    background: var(--accent);
+    color: white;
+  }
 
-    .header-bg {
-      background: var(--card-bg);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .karte {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-    }
-
-    .stationen th {
-      background: var(--card-bg);
-      color: var(--accent);
-      border-color: var(--border);
-    }
-
-    .stationen td {
-      background: #1a1a1a;
-      color: var(--fg);
-      border-color: var(--border);
-    }
-
-    .profile img {
-      border-color: var(--accent);
-      background: #2a2a2a;
-    }
-
-    .karte:hover {
-      box-shadow: 0 2px 12px rgba(32,181,129,0.25);
-    }
+  #theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
   }
 
   html, body {
@@ -71,6 +61,54 @@
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  /* === TABS === */
+  .tabs {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 800px;
+  }
+
+  .tab-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0 0;
+    border-bottom: 1px solid var(--border);
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .tab-nav button {
+    background: none;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    color: var(--fg);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  .tab-nav button:hover {
+    color: var(--accent);
+  }
+
+  .tab-nav button.active {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .tab-content {
+    display: none;
+    padding: 2rem 0;
+  }
+
+  .tab-content.active {
+    display: block;
   }
 
   /* === HEADER === */
@@ -119,7 +157,6 @@
     background: var(--bg);
     padding: 1.5rem 3rem;
     box-sizing: border-box;
-
     display: grid;
     grid-template-columns: 160px 1fr;
     grid-template-rows: auto 1fr;
@@ -162,24 +199,6 @@
     margin-left: 2.5rem;
   }
 
-  @media (max-width: 700px) {
-    .profile {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto auto;
-      gap: 1rem;
-    }
-    .profile h2 {
-      grid-column: 1;
-    }
-    .profile img {
-      margin: 0 auto;
-    }
-    .profile div:last-of-type {
-      margin-top: 0.5rem;
-      margin-left: 0;
-    }
-  }
-
   /* === STATIONEN === */
   .stationen {
     width: 100vw;
@@ -189,21 +208,30 @@
     margin-left: -50vw;
     margin-right: -50vw;
     margin-bottom: 2rem;
-    padding: 0 3rem;
+    background: var(--bg);
     box-sizing: border-box;
+
+    /* gleiche Seitenabstände wie .profile */
+    padding: 1.5rem 3rem;
+
+    /* sorgt für horizontales Scrollen bei schmalen Displays */
     overflow-x: auto;
   }
+
   .stationen table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 0.5rem;
     font-size: 1rem;
+    max-width: 100%;
   }
+
   .stationen th, .stationen td {
     padding: 0.5em 0.7em;
     border: 1px solid var(--border);
     text-align: left;
   }
+
   .stationen th {
     background: var(--card-bg);
     color: var(--accent);
@@ -213,14 +241,14 @@
   /* === GALERIE === */
   .galerie {
     display: grid;
-    grid-template-columns: repeat(3, minmax(280px, 1fr)); /* Karten breiter */
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
     gap: 2.5rem;
     justify-content: center;
     padding-left: 2rem;
     padding-right: 2rem;
   }
   .karte {
-    min-width: 280px; /* Mindestbreite für jede Karte */
+    min-width: 280px;
     min-height: 320px;
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -241,17 +269,17 @@
   }
   .karte img {
     width: 100%;
-    height: 180px;             /* Bildhöhe vergrößert */
+    height: 180px;
     object-fit: cover;
     border-bottom: 1px solid var(--border);
   }
   .karte .card-content {
-    padding: 1.2em 1.2em 2.5em 1.2em; /* Mehr Platz unten */
+    padding: 1.2em 1.2em 2.5em 1.2em;
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 0.7em;
-    min-height: 120px; /* Mindesthöhe für den Textbereich */
+    min-height: 120px;
   }
   .karte h3 {
     margin: 0;
@@ -261,6 +289,44 @@
   .karte p {
     margin: 0;
     font-size: 0.98rem;
+  }
+
+  /* === RESPONSIVE MEDIA QUERIES === */
+  @media (min-width: 1400px) {
+    .profile { padding: 1.5rem 6rem; }
+    .stationen { padding: 1.5rem 6rem; }
+  }
+
+  @media (min-width: 1000px) and (max-width: 1399px) {
+    .profile { padding: 1.5rem 4rem; }
+    .stationen { padding: 1.5rem 4rem; }
+  }
+
+  @media (max-width: 999px) {
+    .profile { padding: 1.5rem 3rem; }
+    .stationen { padding: 1.5rem 3rem; }
+  }
+
+  @media (max-width: 700px) {
+    .profile {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 1rem;
+      padding: 1.5rem 2rem;
+    }
+    .profile h2 {
+      grid-column: 1;
+    }
+    .profile img {
+      margin: 0 auto;
+    }
+    .profile div:last-of-type {
+      margin-top: 0.5rem;
+      margin-left: 0;
+    }
+    .stationen {
+      padding: 1.5rem 2rem;
+    }
   }
 
   @media (max-width: 1000px) {
@@ -285,6 +351,25 @@
 </head>
 
 <body>
+  <button id="theme-toggle" aria-label="Dunkelmodus umschalten">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
+    </svg>
+  </button>
+  
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  </script>
+  
   <div class="header-bg">
     <header>
       <h1>Ann-Sophie Becker</h1>
@@ -293,70 +378,109 @@
   </div>
 
   <main>
-    <section class="profile">
-      <h2>Über mich</h2>
-      <figure>
-        <img src="Uebung_1/IMG_1300.jpeg" alt="Ann-Sophie Becker" loading="lazy">
-        <figcaption>Ann-Sophie Becker</figcaption>
-      </figure>
-      <div>
-        <p>Ich bin Studentin an der Hochschule Mainz und beschäftige mich mit Geoinformatik, GIS und Webentwicklung. Mein Ziel ist es, innovative Lösungen für urbane Herausforderungen zu entwickeln.</p>
-        <p>Mich begeistert die Verbindung von Technik und Raumbezug – wie Daten, Karten und digitale Werkzeuge dabei helfen können, unsere Umwelt besser zu verstehen und nachhaltiger zu gestalten. Besonders spannend finde ich die Anwendung von Geoinformationssystemen (GIS) in den Bereichen Stadtplanung, Umweltmonitoring und Mobilität.</p>
-        <p>Neben dem Studium arbeite ich gerne an eigenen Projekten, bei denen ich Geodaten visualisiere oder interaktive Karten entwickle. Ich lege Wert auf strukturierte Arbeit, Kreativität und ein gutes Verständnis für Details – sei es bei der Datenauswertung, beim Programmieren oder im Teamprojekt.</p>
-        <p>Langfristig möchte ich mein Wissen in Richtung Smart Cities und datenbasierte Stadtentwicklung vertiefen, um aktiv an der Gestaltung lebenswerter, moderner Städte mitzuwirken.</p>
-      </div>
-    </section>
+    <div class="tabs">
+      <nav>
+        <ul class="tab-nav">
+          <li><button class="active" data-tab="about">About</button></li>
+          <li><button data-tab="news">News</button></li>
+          <li><button data-tab="projects">Projekte</button></li>
+        </ul>
+      </nav>
 
-    <section class="stationen">
-      <h2>Stationen</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Jahr</th>
-            <th>Station</th>
-            <th>Ort</th>
-            <th>Stichwort</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>2022</td><td>Schulpraktikum</td><td>Winzeln</td><td>Innenarchitektur</td></tr>
-          <tr><td>2023</td><td>Abitur</td><td>Pirmasens</td><td>Schulabschluss</td></tr>
-          <tr><td>2023</td><td>Vorpraktikum</td><td>Pirmasens</td><td>Studiumsvorbereitung</td></tr>
-          <tr><td>2023</td><td>Studienbeginn</td><td>Mainz</td><td>Vermessung und Geoinformatik</td></tr>
-          <tr><td>2026</td><td>Bachelorarbeit</td><td>Mainz</td><td>Datenanalyse</td></tr>
-        </tbody>
-      </table>
-    </section>
+      <div class="tab-content active" id="about">
+        <section class="profile">
+          <h2>Über mich</h2>
+          <figure>
+            <img src="Uebung_1/IMG_1300.jpeg" alt="Ann-Sophie Becker" loading="lazy">
+            <figcaption>Ann-Sophie Becker</figcaption>
+          </figure>
+          <div>
+            <p>Ich bin Studentin an der Hochschule Mainz und beschäftige mich mit Geoinformatik, GIS und Webentwicklung. Mein Ziel ist es, innovative Lösungen für urbane Herausforderungen zu entwickeln.</p>
+            <p>Mich begeistert die Verbindung von Technik und Raumbezug – wie Daten, Karten und digitale Werkzeuge dabei helfen können, unsere Umwelt besser zu verstehen und nachhaltiger zu gestalten. Besonders spannend finde ich die Anwendung von Geoinformationssystemen (GIS) in den Bereichen Stadtplanung, Umweltmonitoring und Mobilität.</p>
+            <p>Neben dem Studium arbeite ich gerne an eigenen Projekten, bei denen ich Geodaten visualisiere oder interaktive Karten entwickle. Ich lege Wert auf strukturierte Arbeit, Kreativität und ein gutes Verständnis für Details – sei es bei der Datenauswertung, beim Programmieren oder im Teamprojekt.</p>
+            <p>Langfristig möchte ich mein Wissen in Richtung Smart Cities und datenbasierte Stadtentwicklung vertiefen, um aktiv an der Gestaltung lebenswerter, moderner Städte mitzuwirken.</p>
+          </div>
+        </section>
 
-    <section class="galerie">
-      <div class="karte">
-        <a href="https://www.hs-mainz.de/" target="_blank" rel="noopener" aria-label="Hochschule Mainz">
-          <img src="Uebung_1/HS_Mainz.jpeg" alt="Hochschule Mainz" loading="lazy">
-          <div class="card-content">
-            <h3>Hochschule Mainz</h3>
-            <p>Studium im Bereich Geoinformatik und Vermessung.</p>
-          </div>
-        </a>
+        <section class="stationen">
+          <h2>Stationen</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Jahr</th>
+                <th>Station</th>
+                <th>Ort</th>
+                <th>Stichwort</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2022</td><td>Schulpraktikum</td><td>Winzeln</td><td>Innenarchitektur</td></tr>
+              <tr><td>2023</td><td>Abitur</td><td>Pirmasens</td><td>Schulabschluss</td></tr>
+              <tr><td>2023</td><td>Vorpraktikum</td><td>Pirmasens</td><td>Studiumsvorbereitung</td></tr>
+              <tr><td>2023</td><td>Studienbeginn</td><td>Mainz</td><td>Vermessung und Geoinformatik</td></tr>
+              <tr><td>2026</td><td>Bachelorarbeit</td><td>Mainz</td><td>Datenanalyse</td></tr>
+            </tbody>
+          </table>
+        </section>
       </div>
-      <div class="karte">
-        <a href="https://bachelor-hsmainz-2326.github.io/" target="_blank" rel="noopener" aria-label="GitHub">
-          <img src="https://picsum.photos/600/400?random=2" alt="GitHub Platzhalterbild" loading="lazy">
-          <div class="card-content">
-            <h3>GitHub</h3>
-            <p>Mein Code, Projekte und Beiträge auf GitHub.</p>
+
+      <div class="tab-content" id="news">
+        <section>
+          <h2>Neuigkeiten</h2>
+          <div class="news-item">
+            <h3>Oktober 2025</h3>
+            <p>Beginn des 5. Semesters an der Hochschule Mainz</p>
           </div>
-        </a>
+        </section>
       </div>
-      <div class="karte">
-        <a href="https://portfolio.example.com/" target="_blank" rel="noopener" aria-label="Portfolio">
-          <img src="https://picsum.photos/600/400?random=3" alt="Portfolio Platzhalterbild" loading="lazy">
-          <div class="card-content">
-            <h3>Portfolio</h3>
-            <p>Eine Auswahl meiner Arbeiten und Projekte im Überblick.</p>
+
+      <div class="tab-content" id="projects">
+        <section class="galerie">
+          <div class="karte">
+            <a href="https://www.hs-mainz.de/" target="_blank" rel="noopener" aria-label="Hochschule Mainz">
+              <img src="Uebung_1/HS_Mainz.jpeg" alt="Hochschule Mainz" loading="lazy">
+              <div class="card-content">
+                <h3>Hochschule Mainz</h3>
+                <p>Studium im Bereich Geoinformatik und Vermessung.</p>
+              </div>
+            </a>
           </div>
-        </a>
+          <div class="karte">
+            <a href="https://bachelor-hsmainz-2326.github.io/" target="_blank" rel="noopener" aria-label="GitHub">
+              <img src="https://picsum.photos/600/400?random=2" alt="GitHub Platzhalterbild" loading="lazy">
+              <div class="card-content">
+                <h3>GitHub</h3>
+                <p>Mein Code, Projekte und Beiträge auf GitHub.</p>
+              </div>
+            </a>
+          </div>
+          <div class="karte">
+            <a href="https://portfolio.example.com/" target="_blank" rel="noopener" aria-label="Portfolio">
+              <img src="https://picsum.photos/600/400?random=3" alt="Portfolio Platzhalterbild" loading="lazy">
+              <div class="card-content">
+                <h3>Portfolio</h3>
+                <p>Eine Auswahl meiner Arbeiten und Projekte im Überblick.</p>
+              </div>
+            </a>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
   </main>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-nav button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        button.classList.add('active');
+        document.getElementById(button.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
