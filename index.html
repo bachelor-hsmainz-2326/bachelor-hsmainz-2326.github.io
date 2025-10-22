@@ -16,9 +16,9 @@
   :root[data-theme="dark"] {
     --bg: #121212;
     --fg: #e6e6e6;
-    --accent: #20b581;
-    --card-bg: #1c1c1c;
-    --border: #333;
+    --accent: #3feea7;
+    --card-bg: #1a332a;
+    --border: #2f6d55;
   }
 
   #theme-toggle {
@@ -30,8 +30,8 @@
     border: 1px solid var(--border);
     border-radius: 50%;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,8 +45,82 @@
   }
 
   #theme-toggle svg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+  }
+
+  :root[data-theme="dark"] #theme-toggle svg {
+    fill: var(--fg);
+  }
+
+  :root[data-theme="dark"] #theme-toggle:hover svg {
+    fill: white;
+  }
+
+  #email-button {
+    position: fixed;
+    bottom: calc(1rem + 60px);  /* GitHub button height (40px) + increased gap (20px) */
+    right: 1rem;
+    padding: 0.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 1000;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  #email-button:hover {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.05);
+  }
+
+  #email-button svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+
+  #github-button {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 1000;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  #github-button:hover {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.05);
+  }
+
+  #github-button svg {
+    width: 25px;
+    height: 25px;
     fill: currentColor;
   }
 
@@ -238,6 +312,89 @@
     font-weight: 600;
   }
 
+  /* === NEWS === */
+  .news-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 1.5rem 3rem;
+    box-sizing: border-box;
+    background: var(--bg);
+  }
+
+  .news-section h2 {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0;
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .news-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.7em;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .news-card:hover {
+    box-shadow: 0 2px 12px rgba(32,181,129,0.15);
+  }
+
+  .news-card a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+  }
+
+  .news-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .news-content {
+    padding: 1.2rem;
+  }
+
+  .news-date {
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .news-title {
+    margin: 0 0 0.7rem 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+
+  .news-summary {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 700px) {
+    .news-section {
+      padding: 1.5rem 2rem;
+    }
+    .news-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* === GALERIE === */
   .galerie {
     display: grid;
@@ -289,6 +446,86 @@
   .karte p {
     margin: 0;
     font-size: 0.98rem;
+  }
+
+  /* === PROJEKTE === */
+  .projects-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 1.5rem 3rem;
+    box-sizing: border-box;
+    background: var(--bg);
+  }
+
+  .projects-section h2 {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0;
+  }
+
+  .galerie {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .karte {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.7em;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    height: 100%;
+  }
+
+  .karte:hover {
+    box-shadow: 0 2px 12px rgba(32,181,129,0.15);
+  }
+
+  .karte a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .karte img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-content {
+    padding: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .karte h3 {
+    margin: 0 0 0.7rem 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+
+  .karte p {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 700px) {
+    .projects-section {
+      padding: 1.5rem 2rem;
+    }
   }
 
   /* === RESPONSIVE MEDIA QUERIES === */
@@ -356,6 +593,19 @@
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
     </svg>
   </button>
+  
+  <a href="mailto:annsophie.becker@students.hs-mainz.de" id="email-button" aria-label="Email senden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"/>
+      <path d="M3 7l9 6l9 -6"/>
+    </svg>
+  </a>
+
+  <a href="https://bachelor-hsmainz-2326.github.io" id="github-button" aria-label="GitHub Profil besuchen">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.271.098-2.65 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.202 2.397.1 2.65.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+    </svg>
+  </a>
   
   <script>
     const themeToggle = document.getElementById('theme-toggle');
@@ -425,43 +675,45 @@
       </div>
 
       <div class="tab-content" id="news">
-        <section>
+        <section class="news-section">
           <h2>Neuigkeiten</h2>
-          <div class="news-item">
-            <h3>Oktober 2025</h3>
-            <p>Beginn des 5. Semesters an der Hochschule Mainz</p>
+          <div id="news-container" class="news-grid">
+            <!-- News werden hier dynamisch eingefügt -->
           </div>
         </section>
       </div>
 
       <div class="tab-content" id="projects">
-        <section class="galerie">
-          <div class="karte">
-            <a href="https://www.hs-mainz.de/" target="_blank" rel="noopener" aria-label="Hochschule Mainz">
-              <img src="Uebung_1/HS_Mainz.jpeg" alt="Hochschule Mainz" loading="lazy">
-              <div class="card-content">
-                <h3>Hochschule Mainz</h3>
-                <p>Studium im Bereich Geoinformatik und Vermessung.</p>
-              </div>
-            </a>
-          </div>
-          <div class="karte">
-            <a href="https://bachelor-hsmainz-2326.github.io/" target="_blank" rel="noopener" aria-label="GitHub">
-              <img src="https://picsum.photos/600/400?random=2" alt="GitHub Platzhalterbild" loading="lazy">
-              <div class="card-content">
-                <h3>GitHub</h3>
-                <p>Mein Code, Projekte und Beiträge auf GitHub.</p>
-              </div>
-            </a>
-          </div>
-          <div class="karte">
-            <a href="https://portfolio.example.com/" target="_blank" rel="noopener" aria-label="Portfolio">
-              <img src="https://picsum.photos/600/400?random=3" alt="Portfolio Platzhalterbild" loading="lazy">
-              <div class="card-content">
-                <h3>Portfolio</h3>
-                <p>Eine Auswahl meiner Arbeiten und Projekte im Überblick.</p>
-              </div>
-            </a>
+        <section class="projects-section">
+          <h2>Projekte</h2>
+          <div class="galerie">
+            <div class="karte">
+              <a href="https://www.hs-mainz.de/" target="_blank" rel="noopener" aria-label="Hochschule Mainz">
+                <img src="Uebung_1/HS_Mainz.jpeg" alt="Hochschule Mainz" loading="lazy">
+                <div class="card-content">
+                  <h3>Hochschule Mainz</h3>
+                  <p>Studium im Bereich Geoinformatik und Vermessung.</p>
+                </div>
+              </a>
+            </div>
+            <div class="karte">
+              <a href="https://bachelor-hsmainz-2326.github.io/" target="_blank" rel="noopener" aria-label="GitHub">
+                <img src="https://picsum.photos/600/400?random=2" alt="GitHub Platzhalterbild" loading="lazy">
+                <div class="card-content">
+                  <h3>GitHub</h3>
+                  <p>Mein Code, Projekte und Beiträge auf GitHub.</p>
+                </div>
+              </a>
+            </div>
+            <div class="karte">
+              <a href="https://portfolio.example.com/" target="_blank" rel="noopener" aria-label="Portfolio">
+                <img src="https://picsum.photos/600/400?random=3" alt="Portfolio Platzhalterbild" loading="lazy">
+                <div class="card-content">
+                  <h3>Portfolio</h3>
+                  <p>Eine Auswahl meiner Arbeiten und Projekte im Überblick.</p>
+                </div>
+              </a>
+            </div>
           </div>
         </section>
       </div>
@@ -482,5 +734,43 @@
       });
     });
   </script>
+
+  <script>
+  // Load News
+  fetch('news.json')
+    .then(response => response.json())
+    .then(news => {
+      const newsContainer = document.getElementById('news-container');
+      
+      news.forEach(item => {
+        const date = new Date(item.date);
+        const formattedDate = new Intl.DateTimeFormat('de-DE', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }).format(date);
+
+        const newsCard = document.createElement('div');
+        newsCard.className = 'news-card';
+        
+        newsCard.innerHTML = `
+          <a href="${item.link}" target="_blank" rel="noopener">
+            <img src="${item.image}" alt="${item.title}" loading="lazy">
+            <div class="news-content">
+              <div class="news-date">${formattedDate}</div>
+              <h3 class="news-title">${item.title}</h3>
+              <p class="news-summary">${item.summary}</p>
+            </div>
+          </a>
+        `;
+        
+        newsContainer.appendChild(newsCard);
+      });
+    })
+    .catch(error => {
+      console.error('Error loading news:', error);
+      document.getElementById('news-container').innerHTML = '<p>Fehler beim Laden der Neuigkeiten.</p>';
+    });
+</script>
 </body>
 </html>
