@@ -584,6 +584,73 @@
     main { padding: 1rem 0.5rem; }
     .karte img { height: 90px; }
   }
+
+  /* === MAPS === */
+  .map-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 1.5rem 3rem;
+    box-sizing: border-box;
+    background: var(--bg);
+  }
+
+  .map-section h2 {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0;
+  }
+
+  .map-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 900px) {
+    .map-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .map-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.7em;
+    overflow: hidden;
+    padding: 1.2rem;
+  }
+
+  .map-container h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+
+  .map-container p {
+    margin: 1rem 0 0 0;
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .map-container iframe {
+    border-radius: 0.5em;
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 700px) {
+    .map-section {
+      padding: 1.5rem 2rem;
+    }
+    .map-container iframe {
+      height: 300px;
+    }
+  }
   </style>
 </head>
 
@@ -633,7 +700,8 @@
         <ul class="tab-nav">
           <li><button class="active" data-tab="about">About</button></li>
           <li><button data-tab="news">News</button></li>
-          <li><button data-tab="projects">Projekte</button></li>
+          <li><button data-tab="projects">Projects</button></li>
+          <li><button data-tab="maps">Maps</button></li>
         </ul>
       </nav>
 
@@ -713,6 +781,49 @@
                   <p>Eine Auswahl meiner Arbeiten und Projekte im Überblick.</p>
                 </div>
               </a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="tab-content" id="maps">
+        <section class="map-section">
+          <h2>Karten</h2>
+          <div class="map-grid">
+            <div class="map-container">
+              <h3>Basiskarte</h3>
+              <iframe src="Maps/map_1_basiskarte.html" width="100%" height="400" frameborder="0"></iframe>
+              <p>Eine einfache Basiskarte von OpenStreetMap.</p>
+            </div>
+            <div class="map-container">
+              <h3>Wichtige Orte</h3>
+              <iframe src="Maps/map_2_punkte.html" width="100%" height="400" frameborder="0"></iframe>
+              <p>Standort der Hochschule Mainz, der Arbeit und Wohnort.</p>
+            </div>
+            <div class="map-container">
+              <h3>Italien Reiseroute</h3>
+              <iframe src="Maps/map_3_reiseroute.html" width="100%" height="400" frameborder="0"></iframe>
+              <p>Stationen der Italienreise mit dem Camper.</p>
+            </div>
+            <div class="map-container">
+              <h3>Besuchte Länder</h3>
+              <iframe src="Maps/map_4_flaechen_online.html" width="100%" height="400" frameborder="0"></iframe>
+              <p>Eine Übersicht der von mir besuchten Länder.</p>
+            </div>
+            <div class="map-container">
+              <h3>3D Gebäude</h3>
+              <iframe src="Maps/3D_gebaeude.html" width="100%" height="400" frameborder="0"></iframe>
+              <p>3D-Visualisierung von Gebäuden mit LoD2-Daten.</p>
+            </div>
+            <div class="map-container">
+              <h3>Kepler.gl Karte</h3>
+              <iframe src="Maps/kepler.gl.html" width="100%" height="400" frameborder="0"></iframe>
+              <p>Interaktive Datenvisualisierung mit Kepler.gl der weltweiten Flüge.</p>
+            </div>
+            <div class="map-container">
+              <h3>Terrain Animation</h3>
+              <iframe src="Maps/webgl_geometry_terrain_raycast.html" width="100%" height="400" frameborder="0"></iframe>
+              <p>3D Terrain Animation mit WebGL und Three.js.</p>
             </div>
           </div>
         </section>
